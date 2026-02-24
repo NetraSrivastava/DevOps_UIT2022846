@@ -1,0 +1,42 @@
+import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+public class LibraryMemberTest {
+
+    private Library library;
+
+    @BeforeEach
+    void setUp() {
+        library = new Library();
+    }
+
+    @Test
+    void testRegisterMemberSuccessfully() {
+        assertTrue(library.registerMember("M101"));
+    }
+
+    @Test
+    void testRegisterDuplicateMember() {
+        library.registerMember("M101");
+        assertFalse(library.registerMember("M101"));
+    }
+
+    @Test
+    void testRemoveMemberSuccessfully() {
+        library.registerMember("M101");
+        assertTrue(library.removeMember("M101"));
+    }
+
+    @Test
+    void testRemoveNonExistingMember() {
+        assertFalse(library.removeMember("M999"));
+    }
+
+    @Test
+    void testValidateMember() {
+        library.registerMember("M101");
+        assertTrue(library.isValidMember("M101"));
+        assertFalse(library.isValidMember("M202"));
+    }
+}
